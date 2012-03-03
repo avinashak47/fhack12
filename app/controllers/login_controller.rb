@@ -14,8 +14,8 @@ def fb_callback
 		oauth = Koala::Facebook::OAuth.new(FB[:id], FB[:secret], 'http://gentle-fire-7931.heroku.com/FB/FBCallback')
 	 	oauth_token = oauth.get_access_token(params['code'])
 		
-		 DataController::build_song_index(oauth_token)
-		
+		 result = DataController::build_song_index(oauth_token)
+		render :json => result
 	 end
 
 end

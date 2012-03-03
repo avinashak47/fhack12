@@ -22,7 +22,7 @@ def self.build_song_index (oauth_access_token)
 
 		friendArtistData.each { |artistData| 
 			tempArtist = Artists.new
-			tempArtist[:hash_id] = artistData['id']
+			tempArtist[:hash_id] = String(artistData['id'])
 			tempArist[:group_name] = artistData['name']
 			if (tempArtist.valid?)
 				tempArtist.save

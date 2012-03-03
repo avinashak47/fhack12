@@ -58,21 +58,27 @@ SongView = Backbone.View.extend({
 	render: function(){
 		console.log("rendering view");
 
-		/*var query = "http://query.yahooapis.com/v1/public/yql?q=%20SELECT%20*%20FROM%20lastfm.album.getinfo%20WHERE%20api_key%3D%22b25b959554ed76058ac220b7b2e0a026%22%20and%20artist%3D%22"+escape(this.model.get("artist"))+"%22%20and%20album%3D%22"+escape(this.model.get("album"))+"%22&format=json&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=";
+		var query = "http://query.yahooapis.com/v1/public/yql?q=%20SELECT%20*%20FROM%20lastfm.album.getinfo%20WHERE%20api_key%3D%22b25b959554ed76058ac220b7b2e0a026%22%20and%20artist%3D%22"+escape(this.model.get("artist"))+"%22%20and%20album%3D%22"+escape(this.model.get("album"))+"%22&format=json&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=";
 
 		var link = "poop";
-		var m = this.model;
+		var m = this;
 		$.get(query,
 			function(data) {
 				var link = data.query.results.lfm.album.image[3].content;
-				m.set("art", link);
+				m.model.set("art", link);
+				var html = m.template(m.model.toJSON());
+
+				$(m.el).html(html);
+
+				var $container = $("#content");
+				$container.append($(m.el));
+				$container.append($(m.el)).imagesLoaded(function() {$container.masonry('appended', $(m.el));});
+	
+				$container.masonry('reload');
+
 			},
-			"json");*/
-		var html = this.template(this.model.toJSON());
-		//$("#sample").html();
-		//console.log(html);
-		$(this.el).html(html);
-		return this;
+			"json");
+	//	return this;
 	},
 
 	toggleButtons: function() {
@@ -160,9 +166,11 @@ AppView = Backbone.View.extend({
 	addOne: function(song, $container) {
 		console.log("adding a song");
 		var view = new SongView({model: song});
-		var view_render = $(view.render().el);
+		//var view_render = $(view.render().el);
 		
-		$container.append(view_render).masonry('appended', view_render);
+		//$container.append(view_render).imagesLoaded(function() {
+		//	masonry('appended', view_render);
+		//});
 	},
 	test: function() {
 		console.log("test click appview event");
@@ -199,12 +207,14 @@ $(function() {
 	$container.masonry({
 		itemSelector: ".song",
 		isFitWidth: true,
-		columnWidth: 100
+		columnWidth: 100,
+		isAnimated: true
 	});
 	
 	for(var i = 0; i < Songs.length; i++) {
 		App.addOne(Songs.models[i], $container);
 	}
+
 	//var test = new SongModel();
 	//var view = new SongView({ model: test });
 

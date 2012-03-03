@@ -15,6 +15,15 @@ SongModel = Backbone.Model.extend({
     }
 });
 
+SongView = Backbone.View.extend({
+	template: _.template($("#song-template").html()),
+	initialize: function(options) {
+	
+	},
+	render: function(){
+	}
+});
+
 SongCollection = Backbone.Collection.extend({
 	model: SongModel
 });
@@ -28,6 +37,7 @@ AppView = Backbone.View.extend({
 		Songs.bind("all", this.render, this);
 		// Songs.fetch();
 	},
+	
 	render: function() {
 		console.log("render application");
 		// this.$("").html(this.template());

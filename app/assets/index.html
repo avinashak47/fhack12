@@ -4,10 +4,43 @@
 		<script src="javascripts/jquery.js"></script>
 		<script src="javascripts/underscore.js"></script>
 		<script src="javascripts/backbone.js"></script>
+		<script src="javascripts/jquery.masonry.min.js"></script>
 		<style>
 			html {
 				padding-top: 2em;
 				background-image: url("images/bg.gif");
+			}
+			
+			ul li {
+				list-style: none;
+				float: left;
+				margin-right: 1em;
+			}
+			
+			ul li a {
+				text-decoration: none;
+				color: #FFF;
+			}
+			
+			.navlinks {
+				padding-top: .8em;
+				text-align: center;
+				width: 5em;
+				height: 2em;
+				vertical-align: middle;
+			}
+			
+			ul {
+				background-color: #222;
+				width: 12em;
+				height: 3em;
+				vertical-align: middle;
+			}
+			
+			.rank1 {
+				width: 380px;
+				height: 380px;
+				background-color: #222;
 			}
 		</style>
 	</head>
@@ -16,10 +49,14 @@
 		<nav>
 			<img src="images/logo.png"/>
 			<ul>
-				<li></li>
-				<li></li>
+				<li><a href="#"><div class="navlinks">trending</div></a></li>
+				<li><a href="#"><div class="navlinks">friends</div></a></li>
 			</ul>
 		</nav>
+		
+		<div class="rank1">
+			
+		</div>
 		
 		<!-- album view -->
 		<div id="content">
@@ -39,5 +76,6 @@
 		
 		<!-- main application -->
 		<script src="javascripts/fhack.js"></script>
+		<script src="javascripts/masonry.js"></script>
 	</body>
 </html>

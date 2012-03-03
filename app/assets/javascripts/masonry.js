@@ -14,24 +14,11 @@ function makeBox(song) {
 	img.src = "http://userserve-ak.last.fm/serve/300x300/"+art+".png";
 	img.className = "rank"+rank;
 	box.appendChild(img);
-	return box;
+	return $(box);
 }
 
 function appendBox(song, container) {
-	var $box = $(makeBox(song));
-	//container.append($box);
-	container.append($box).masonry('appended', $box);
+	container.append(song).masonry('appended', $box);
 }
 
-$(function() {
-	var $container = $("#content");
-	$container.masonry({
-		itemSelector: ".box",
-		columnWidth: 100
-	});
-	// 
-	// alert(Songs.length);
-	for(var i = 0; i < Songs.length; i++) {
-		appendBox(Songs.models[i], $container);
-	}
-});
+

@@ -16,15 +16,32 @@ SongModel = Backbone.Model.extend({
 });
 
 SongView = Backbone.View.extend({
+
+
 	template: _.template($("#song-template").html()),
+
+	events: {
+		"hover .subtitle"	: "toggleButtons"
+	},
+
 	initialize: function(options) {
 		this.model.bind('change', this.render, this);
 		this.render();
 	},
+
 	render: function(){
 		console.log("rendering view");
-		$("#sample").html(this.template(this.model.toJSON()));
+		var html = this.template(this.model.toJSON());
+		//$("#sample").html();
+		//console.log(html);
+		$(this.el).html(html);
+		return this;
+	},
+
+	toggleButtons: function() {
+		this.$(".links").toggle();
 	}
+
 });
 
 SongCollection = Backbone.Collection.extend({
@@ -32,7 +49,11 @@ SongCollection = Backbone.Collection.extend({
 });
 
 AppView = Backbone.View.extend({
-	template: _.template($("#app-template").html()),
+	template: _.template($("#app-template").html()),	
+
+	events: {
+		"click .rank1" : "test"
+	},
 
 	initialize: function(options) {
 		console.log("application initialized");
@@ -45,20 +66,26 @@ AppView = Backbone.View.extend({
 		console.log("render application");
 		// this.$("").html(this.template());
 	},
-	addOne: function() {
+	addOne: function(song, $container) {
 		console.log("adding a song");
+		var view = new SongView({model: song});
+		var view_render = $(view.render().el);
+		
+		$container.append(view_render).masonry('appended', view_render);
 	},
+	test: function() {
+		console.log("test click appview event");
+	}
 });
 
 
 // initializations
 var i;
 var s = [];
-
 Songs = new SongCollection();
 
 // simulation
-/*
+
 for (i = 0; i < 20; i++) {
 	Songs.add(new SongModel({
 		title: "Born to be Wild",
@@ -67,9 +94,22 @@ for (i = 0; i < 20; i++) {
         art: "52661047",
         rank: Math.floor(Math.random()*3) 
      }));
-}*/
-// Songs.add(s1);
-// App = new AppView();
+} 
 
-var test = new SongModel();
-var view = new SongView({ model: test });
+$(function() {
+	App = new AppView();
+
+	$container = $("#content");
+	$container.masonry({
+		itemSelector: ".song",
+		columnWidth: 100
+	});
+	
+	for(var i = 0; i < Songs.length; i++) {
+		App.addOne(Songs.models[i], $container);
+	}
+	//var test = new SongModel();
+	//var view = new SongView({ model: test });
+
+//	App.addOne(test, $container);
+});

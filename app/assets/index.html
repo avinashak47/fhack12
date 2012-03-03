@@ -43,7 +43,7 @@
 				vertical-align: middle;
 			}
 			
-			.rank1 {
+			.rank0 {
 				width: 380px;
 				height: 380px;
 				background-color: #222;
@@ -52,6 +52,30 @@
 				background-repeat: no-repeat;
 				position: relative;
 			}
+
+			.rank1 {
+				width: 190px;
+				height: 190px;
+				background-color: #222;
+				background-image: url("http://userserve-ak.last.fm/serve/300x300/66586856.png");
+				background-size: 100%;
+				background-repeat: no-repeat;
+				position: relative;
+			}
+
+			.rank2 {
+				width: 95px;
+				height: 95px;
+				background-color: #222;
+				background-image: url("http://userserve-ak.last.fm/serve/300x300/66586856.png");
+				background-size: 100%;
+				background-repeat: no-repeat;
+				position: relative;
+			}
+			.links {
+				display:none;
+			}	
+
 			
 			.subtitle {
 				position: absolute;
@@ -105,14 +129,21 @@
 			</div>
 		</script>
 		<script type="text/template" id="song-template">
-			<div class="song">
-				<span><%= title %></span>
-				<span><%= artist %></span>
+			<div width="100px" class="song rank<%= rank %>">
+				<img src="http://userserve-ak.last.fm/serve/300x300/<%= art %>.png" class="rank<%= rank %>"/>
+				<div class="subtitle">
+					<h1><%= title %></h1>
+					<h4><%= artist %></h4>
+					<div class="links">
+						<a href="#">A</a>
+						<a href="#">B</a>
+						<a href="#">C</a>
+					</div>
+				</div>	
 			</div>
 		</script>
 		
 		<!-- main application -->
 		<script src="javascripts/fhack.js"></script>
-		<script src="javascripts/masonry.js"></script>
 	</body>
 </html>

@@ -16,9 +16,8 @@ def self.build_song_index (oauth_access_token)
 	friendArtistData = Array.new
 	friendMusicData = Array.new
 	friends.each { |friend|
-		friendArtistData << graph.get_connections("#{friend['id']}", "music")	
-		friendMusicData <<  graph.get_connections("#{friend['id']}", "music.listens")	
-		return {:artistData=>friendArtistData, :songData=>friendMusicData}
+		friendArtistData << graph.get_connections(friend['id'], "music")	
+		friendMusicData <<  graph.get_connections(friend['id'], "music.listens")	
 		friendArtistData.each { |artistData| 
 			tempArtist = Artists.new
 			tempArtist[:hash_id] = String(artistData['id'])	

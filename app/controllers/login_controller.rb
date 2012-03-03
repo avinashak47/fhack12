@@ -3,7 +3,7 @@ class LoginController < ApplicationController
 
 def fb_login
 	oauth = Koala::Facebook::OAuth.new(FB[:id], FB[:secret], 'http://gentle-fire-7931.heroku.com/FB/FBCallback')
-	render :text=>oauth.url_for_oauth_code(:permissions=>"user_actions.music,user_likes,friends_likes,user_actions.music")
+	render :text=>oauth.url_for_oauth_code(:permissions=>"user_actions.music,user_likes,friends_likes,friends_actions.music")
 end
 
 def fb_callback

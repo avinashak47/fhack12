@@ -106,8 +106,25 @@ SongView = Backbone.View.extend({
 		$.get(query,
 			function(data) {
 				url = data.response.songs[0].tracks[0].preview_url;
-				$("#jp_container_1").jPlayer("setMedia", url);
+				$("#jp_container_1").jPlayer("setMedia", { mp3: url });
+				// $("#jp_container_1").jPlayer("setMedia", { mp3: url });
 				console.log(url);
+				// $("#jp_container_1").jPlayer("play");
+				
+				$("#jquery_jplayer_1").jPlayer({
+    				ready: function (event) {
+    				console.log("ready");
+    				var $this = $(this);
+ 					// $("h1").click(function(e) {
+       				// console.log("playing");
+       				$this.jPlayer("setMedia", { mp3: url });
+        			$this.jPlayer("play");
+        			// e.preventDefault();
+   			 	},
+				swfPath: "javascripts",
+    	    	supplied: "mp3"
+				});
+
 			}, 
 			"json");
 		$("#jp_container_1").show();

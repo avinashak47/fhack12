@@ -1,241 +1,140 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
-  <head>
-    <title>Ruby on Rails: Welcome aboard</title>
-    <style type="text/css" media="screen">
-      body {
-        margin: 0;
-        margin-bottom: 25px;
-        padding: 0;
-        background-color: #f0f0f0;
-        font-family: "Lucida Grande", "Bitstream Vera Sans", "Verdana";
-        font-size: 13px;
-        color: #333;
-      }
+	<head>
+		<meta charset="utf-8" />
+		<title>qriocity</title>
 
-      h1 {
-        font-size: 28px;
-        color: #000;
-      }
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	
+		<!-- 1140px Grid styles for IE -->
+		<!--[if lte IE 9]><link rel="stylesheet" href="css/ie.css" type="text/css" media="screen" /><![endif]-->
 
-      a  {color: #03c}
-      a:hover {
-        background-color: #03c;
-        color: white;
-        text-decoration: none;
-      }
-
-
-      #page {
-        background-color: #f0f0f0;
-        width: 750px;
-        margin: 0;
-        margin-left: auto;
-        margin-right: auto;
-      }
-
-      #content {
-        float: left;
-        background-color: white;
-        border: 3px solid #aaa;
-        border-top: none;
-        padding: 25px;
-        width: 500px;
-      }
-
-      #sidebar {
-        float: right;
-        width: 175px;
-      }
-
-      #footer {
-        clear: both;
-      }
-
-      #header, #about, #getting-started {
-        padding-left: 75px;
-        padding-right: 30px;
-      }
+		<!-- The 1140px Grid - http://cssgrid.net/ -->
+		<link rel="stylesheet" href="stylesheets/1140.css" type="text/css" media="screen" />
+	
+		<!-- Your styles -->
+		<link rel="stylesheet" href="stylesheets/styles.css" type="text/css" media="screen" />
+	
+		<!--css3-mediaqueries-js - http://code.google.com/p/css3-mediaqueries-js/ - Enables media queries in some unsupported browsers-->
+		<script type="text/javascript" src="javascripts/css3-mediaqueries.js"></script>
+		
+		<script src="javascripts/jquery.js"></script>
+		<script src="javascripts/underscore.js"></script>
+		<script src="javascripts/backbone.js"></script>
+		<script src="javascripts/jquery.masonry.min.js"></script>
+		<script src="javascripts/jplayer.js"></script>
+		<link rel="stylesheet" href="stylesheets/styles.css"/>
+	</head>
+	<body>
+		<!-- navigation -->
+		<nav class="container">
+			<div class="row">
+				<div class="threecol">
+					<img src="images/logo.png"/>
+				</div>
+				<span class="threecol"></span>
+				<ul class="threecol" style="float:right;">
+					<li><a href="javascript:;"><div class="navlinks" style="background-image:url('images/trend.png');">trending</div></a></li>
+					<li><a href="javascript:;"><div class="navlinks" style="background-image:url('images/heart.png');">friends</div></a></li>
+				</ul>	
+			</div>
+		</nav>
+		
+		<!--
+			<img src="images/logo.png"/>
+			
+		</nav>
+		
+		<div class="rank1">
+			<div class="subtitle">
+				<h1>Party Rock Anthem</h1>
+				<h4>LMFAO</h4>
+			</div>	
+		</div>
+		-->
 
 
-      #header {
-        background-image: url("/assets/rails.png");
-        background-repeat: no-repeat;
-        background-position: top left;
-        height: 64px;
-      }
-      #header h1, #header h2 {margin: 0}
-      #header h2 {
-        color: #888;
-        font-weight: normal;
-        font-size: 16px;
-      }
+<link href="stylesheets/jplayer.css" rel="stylesheet" type="text/css" />
+<link href="stylesheets/jplayer_skin.css" rel="stylesheet" type="text/css" />
+<div id="jquery_jplayer_1" class="jp-jplayer"></div>
 
+		<div style="position:fixed; left:2%; bottom:2%; z-index:20; display:none" id="jp_container_1" class="jp-audio">
+			<div class="jp-type-single">
+				<div class="jp-gui jp-interface">
+					<ul class="jp-controls">
+						<li><a href="javascript:;" class="jp-play" tabindex="1">play</a></li>
+						<li><a href="javascript:;" class="jp-pause" tabindex="1">pause</a></li>
+						<li><a href="javascript:;" class="jp-stop" tabindex="1">stop</a></li>
+						<li><a href="javascript:;" class="jp-mute" tabindex="1" title="mute">mute</a></li>
+						<li><a href="javascript:;" class="jp-unmute" tabindex="1" title="unmute">unmute</a></li>
+						<li><a href="javascript:;" class="jp-volume-max" tabindex="1" title="max volume">max volume</a></li>
+					</ul>
+					<div class="jp-progress">
+						<div class="jp-seek-bar">
+							<div class="jp-play-bar"></div>
 
-      #about h3 {
-        margin: 0;
-        margin-bottom: 10px;
-        font-size: 14px;
-      }
+						</div>
+					</div>
+					<div class="jp-volume-bar">
+						<div class="jp-volume-bar-value"></div>
+					</div>
+					<div class="jp-current-time"></div>
+					<div class="jp-duration"></div>
+					<ul class="jp-toggles">
+						<li><a href="javascript:;" class="jp-repeat" tabindex="1" title="repeat">repeat</a></li>
+					</ul>
+				</div>
+				<div class="jp-title">
+					<ul style="margin:auto;" >
+						<li></li>
+					</ul>
+				</div>
+				<div class="jp-no-solution">
+					<span>Update Required</span>
+					To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+				</div>
+			</div>
+		</div>
 
-      #about-content {
-        background-color: #ffd;
-        border: 1px solid #fc0;
-        margin-left: -55px;
-        margin-right: -10px;
-      }
-      #about-content table {
-        margin-top: 10px;
-        margin-bottom: 10px;
-        font-size: 11px;
-        border-collapse: collapse;
-      }
-      #about-content td {
-        padding: 10px;
-        padding-top: 3px;
-        padding-bottom: 3px;
-      }
-      #about-content td.name  {color: #555}
-      #about-content td.value {color: #000}
-
-      #about-content ul {
-        padding: 0;
-        list-style-type: none;
-      }
-
-      #about-content.failure {
-        background-color: #fcc;
-        border: 1px solid #f00;
-      }
-      #about-content.failure p {
-        margin: 0;
-        padding: 10px;
-      }
-
-
-      #getting-started {
-        border-top: 1px solid #ccc;
-        margin-top: 25px;
-        padding-top: 15px;
-      }
-      #getting-started h1 {
-        margin: 0;
-        font-size: 20px;
-      }
-      #getting-started h2 {
-        margin: 0;
-        font-size: 14px;
-        font-weight: normal;
-        color: #333;
-        margin-bottom: 25px;
-      }
-      #getting-started ol {
-        margin-left: 0;
-        padding-left: 0;
-      }
-      #getting-started li {
-        font-size: 18px;
-        color: #888;
-        margin-bottom: 25px;
-      }
-      #getting-started li h2 {
-        margin: 0;
-        font-weight: normal;
-        font-size: 18px;
-        color: #333;
-      }
-      #getting-started li p {
-        color: #555;
-        font-size: 13px;
-      }
-
-
-      #sidebar ul {
-        margin-left: 0;
-        padding-left: 0;
-      }
-      #sidebar ul h3 {
-        margin-top: 25px;
-        font-size: 16px;
-        padding-bottom: 10px;
-        border-bottom: 1px solid #ccc;
-      }
-      #sidebar li {
-        list-style-type: none;
-      }
-      #sidebar ul.links li {
-        margin-bottom: 5px;
-      }
-
-      .filename {
-        font-style: italic;
-      }
-    </style>
-    <script type="text/javascript">
-      function about() {
-        info = document.getElementById('about-content');
-        if (window.XMLHttpRequest)
-          { xhr = new XMLHttpRequest(); }
-        else
-          { xhr = new ActiveXObject("Microsoft.XMLHTTP"); }
-        xhr.open("GET","rails/info/properties",false);
-        xhr.send("");
-        info.innerHTML = xhr.responseText;
-        info.style.display = 'block'
-      }
-    </script>
-  </head>
-  <body>
-    <div id="page">
-      <div id="sidebar">
-        <ul id="sidebar-items">
-          <li>
-            <h3>Browse the documentation</h3>
-            <ul class="links">
-              <li><a href="http://guides.rubyonrails.org/">Rails Guides</a></li>
-              <li><a href="http://api.rubyonrails.org/">Rails API</a></li>
-              <li><a href="http://www.ruby-doc.org/core/">Ruby core</a></li>
-              <li><a href="http://www.ruby-doc.org/stdlib/">Ruby standard library</a></li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-
-      <div id="content">
-        <div id="header">
-          <h1>Welcome aboard</h1>
-          <h2>You&rsquo;re riding Ruby on Rails!</h2>
-        </div>
-
-        <div id="about">
-          <h3><a href="rails/info/properties" onclick="about(); return false">About your application&rsquo;s environment</a></h3>
-          <div id="about-content" style="display: none"></div>
-        </div>
-
-        <div id="getting-started">
-          <h1>Getting started</h1>
-          <h2>Here&rsquo;s how to get rolling:</h2>
-
-          <ol>
-            <li>
-              <h2>Use <code>rails generate</code> to create your models and controllers</h2>
-              <p>To see all available options, run it without parameters.</p>
-            </li>
-
-            <li>
-              <h2>Set up a default route and remove <span class="filename">public/index.html</span></h2>
-              <p>Routes are set up in <span class="filename">config/routes.rb</span>.</p>
-            </li>
-
-            <li>
-              <h2>Create your database</h2>
-              <p>Run <code>rake db:create</code> to create your database. If you're not using SQLite (the default), edit <span class="filename">config/database.yml</span> with your username and password.</p>
-            </li>
-          </ol>
-        </div>
-      </div>
-
-      <div id="footer">&nbsp;</div>
-    </div>
-  </body>
+			<div id="jplayer_inspector"></div>
+		
+<!-- ------------------------------------  -->
+			
+		<div id="sample"></div>
+		
+		<!-- album view -->
+		<div class="container">
+			<div class="row">
+				<div id="playlist" class="coltwo"></div>
+				<div id="content" class="colten" style="width: 500px;"></div>
+			</div>
+		</div>
+		
+		<!-- templates -->
+		<script type="text/template" id="app-template">
+			<div>
+			</div>
+		</script>
+		<script type="text/template" id="song-template">
+			<div width="100px" class="song rank<%= rank %>">
+				<!--<img src="http://userserve-ak.last.fm/serve/300x300/<%= art %>.png" class="rank<%= rank %>"/>-->
+				<img src="<%= art %>" class="rank<%= rank %>"/>
+				<div class="overlay<%= rank %>">
+					<div class="t<%= rank %>"><%= title %></div>
+					<div class="links">
+						<a class="audioButton" href="javascript:;">A</a>
+						<a class="videoButton" href="javascript:;">B</a>
+						<a href="#">C</a>
+					</div>
+				</div>	
+			</div>
+		</script>
+		
+		<!-- main application -->
+		<script src="javascripts/fhack.js"></script>
+		
+		<!-- jplayer -->
+		<!-- <script src="javascripts/fhack_jplayer.js"></script> -->
+	</body>
 </html>
+

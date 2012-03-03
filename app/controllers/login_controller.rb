@@ -1,3 +1,4 @@
+require 'digest'
 class LoginController < ApplicationController
 
 def fb_login
@@ -12,9 +13,9 @@ def fb_callback
 	 else
 		oauth = Koala::Facebook::OAuth.new(FB[:id], FB[:secret], 'http://gentle-fire-7931.heroku.com/FB/FBCallback')
 	 	oauth_token = oauth.get_access_token(params['code'])
-		friends = DataController::build_song_index(oauth_token)	
-		render :json=>friends
-		return
+		
+		 DataController::build_song_index(oauth_token)
+		
 	 end
 
 end

@@ -5,6 +5,7 @@ class CreateSongsRelations < ActiveRecord::Migration
       t.string :song_hash_id , :null=>false
       t.integer :popularity
       t.date :last_listened, :null=>false
+      t.string :friends_who_played
       t.string :image_link
 
       t.timestamps

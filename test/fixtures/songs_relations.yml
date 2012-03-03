@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  user_id: MyString
+  song_hash_id: MyString
+  popularity: 1
+  last_listened: 2012-03-03
+  image_link: MyString
+
+two:
+  user_id: MyString
+  song_hash_id: MyString
+  popularity: 1
+  last_listened: 2012-03-03
+  image_link: MyString

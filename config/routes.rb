@@ -16,7 +16,12 @@ Fhack::Application.routes.draw do
 
 
   match '/FB/login' => 'login#fb_login'
+  match '/FB/FBCallback' => 'login#fb_callback'
+  #match '/:id/artists' => 
+  #match '/:id/songs' =>
+  
   # Sample resource route with options:
+
   #   resources :products do
   #     member do
   #       get 'short'

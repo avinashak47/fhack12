@@ -3,7 +3,7 @@ SongModel = Backbone.Model.extend({
         title: "Born to be Wild",
         album: "Steppenwolf",
         artist: "Steppenwolf",
-        art: "http://userserve-ak.last.fm/serve/_/52661047/Steppenwolf.jpg",
+        art: "52661047",
         rank: 3
     },
     initialize: function() {
@@ -43,8 +43,16 @@ var i;
 var s = [];
 
 Songs = new SongCollection();
+
+// simulation
 for (i = 0; i < 20; i++) {
-	Songs.add(new SongModel());
+	Songs.add(new SongModel({
+		title: "Born to be Wild",
+        album: "Steppenwolf",
+        artist: "Steppenwolf",
+        art: "52661047",
+        rank: Math.floor(Math.random()*3) + 1
+     }));
 }
 // Songs.add(s1);
 App = new AppView();

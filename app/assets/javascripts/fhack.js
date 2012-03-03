@@ -18,9 +18,12 @@ SongModel = Backbone.Model.extend({
 SongView = Backbone.View.extend({
 	template: _.template($("#song-template").html()),
 	initialize: function(options) {
-	
+		this.model.bind('change', this.render, this);
+		this.render();
 	},
 	render: function(){
+		console.log("rendering view");
+		$("#sample").html(this.template(this.model.toJSON()));
 	}
 });
 
@@ -55,6 +58,7 @@ var s = [];
 Songs = new SongCollection();
 
 // simulation
+/*
 for (i = 0; i < 20; i++) {
 	Songs.add(new SongModel({
 		title: "Born to be Wild",
@@ -63,6 +67,9 @@ for (i = 0; i < 20; i++) {
         art: "52661047",
         rank: Math.floor(Math.random()*3) 
      }));
-}
+}*/
 // Songs.add(s1);
-App = new AppView();
+// App = new AppView();
+
+var test = new SongModel();
+var view = new SongView({ model: test });

@@ -29,7 +29,8 @@ $(function() {
 		itemSelector: ".box",
 		columnWidth: 100
 	});
-	alert(Songs.length);
+	// 
+	// alert(Songs.length);
 	for(var i = 0; i < Songs.length; i++) {
 		appendBox(Songs.models[i], $container);
 	}

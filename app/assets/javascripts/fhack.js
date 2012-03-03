@@ -51,7 +51,7 @@ for (i = 0; i < 20; i++) {
         album: "Steppenwolf",
         artist: "Steppenwolf",
         art: "52661047",
-        rank: Math.floor(Math.random()*3) + 1
+        rank: Math.floor(Math.random()*3) 
      }));
 }
 // Songs.add(s1);

@@ -16,21 +16,30 @@ def self.build_song_index (oauth_access_token)
 	friendArtistData = Array.new
 	friendMusicData = Array.new
 	friends.each { |friend|
-		friendArtistData << graph.get_connections(friend['id'], "music")	
-		friendMusicData <<  graph.get_connections(friend['id'], "music.listens")	
-		friendArtistData.each { |artistData| 
+		frndArtist = graph.get_connections(friend['id'], "music")
+		if (!frndArtist.nil?)
+			friendArtistData << frndArtist
+		end
+		frndMusic = graph.get_connections(friend['id'], "music.listens")	
+		if (!frndMusic.nil?)				
+			friendMusicData << frndMusic
+		end			
+	}	
+
+		return [friendMusicData.length, friendArtistData.length]
+		friendArtistData.each { |artistData| 		
 			tempArtist = Artists.new
 			tempArtist[:hash_id] = String(artistData['id'])	
 			tempArist[:group_name] = artistData['name']
 			if (tempArtist.valid?)
-				tempArtist.save
+					tempArtist.save
 			end						
 		}
 
 		friendMusicData.each { |musicData| 
 			tempSong = Songs.new
 			tempDetails = graph.get_object("#{musicData['data']['id']}")
-			tempSong[:hash_id] = "#{musicData['data']['id']}"
+			tempSong[:hash_id] = musicData['data']['id']	
 			tempSong[:song_name] = musicData['song']['title']
 			tempSong[:albumName] = tempDetails['data']['album']['url']['title']
 			tempSong[:artist_name] = tempDetails['data']['musicians']['name']
@@ -39,7 +48,7 @@ def self.build_song_index (oauth_access_token)
 			end
 																																																																																																																				
 		}
-	}
+	
 	
 	return 
 end

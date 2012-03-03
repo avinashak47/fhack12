@@ -32,6 +32,8 @@
 		width: 5em;
 		height: 2em;
 		vertical-align: middle;
+		background-repeat: no-repeat;
+		background-position: 20% 50%;
 	}
 			
 	ul {
@@ -145,7 +147,7 @@
 	}
 	
 	.song {
-		margin-bottom: .7em;
+		margin-bottom: 1em;
 	}
 
 

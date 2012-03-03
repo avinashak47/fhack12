@@ -217,6 +217,11 @@ $(function() {
 		App.addOne(Songs.models[i], $container);
 	}
 
+    $.get( "http://gentle-fire-7931.heroku.com/get_songs", function(data) {
+        console.log(data);
+    });
+
+    console.log("run");
 	//var test = new SongModel();
 	//var view = new SongView({ model: test });
 

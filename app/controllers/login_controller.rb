@@ -6,10 +6,10 @@ def fb_login
 end
 
 def fb_callback
-	 if(params[:code].nil?)
-		render :json=>{"Error":"Put more shiz in from the error foo!"}
+	 if(params['code'].nil?)
+		render :json=>{"Error"=>"Put more shiz in from the error foo!"}
 	 else
-	 	@@oauth_token = @oauth.get_access_token(params[:code])
+	 	@@oauth_token = @oauth.get_access_token(params['code'])
 		DataController::build_song_index(@@oauth_token)	
 	 end
 end

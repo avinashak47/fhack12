@@ -16,6 +16,7 @@ Fhack::Application.routes.draw do
 
 
   match '/FB/login' => 'login#fb_login'
+  match "/pages", :to => "pages#index"
   # Sample resource route with options:
   #   resources :products do
   #     member do

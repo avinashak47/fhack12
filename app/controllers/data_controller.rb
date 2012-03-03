@@ -19,7 +19,6 @@ def self.build_song_index (oauth_access_token)
 	friends.each { |friend|
 		friendArtistData << graph.get_connections("#{friend['id']}", "music")	
 		friendMusicData <<  graph.get_connections("#{friend['id']}", "music.listens")	
-	}
 
 		friendArtistData.each { |artistData| 
 			tempArtist = Artist.new
@@ -44,7 +43,7 @@ def self.build_song_index (oauth_access_token)
 		}
 	}
 	
-		return 
+	return 
 end
 
 

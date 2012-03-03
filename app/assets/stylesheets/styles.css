@@ -2,24 +2,152 @@
 /* ! Layout for desktop version   */
 /* ============================== */
 
-	body {
+	* {
+		font-family: sans-serif, Arial;
+	}
 		
+	html {
+		padding-top: 2em;
+		background-image: url("../images/bg.gif");
+	}
+			
+	ul li {
+		list-style: none;
+		float: left;
+	}
+			
+	ul li a {
+		text-decoration: none;
+		color: #FFF;
+	}
+	
+	nav {
+		margin-bottom: 1em;
+	}
+			
+	.navlinks {
+		padding-top: 1em;
+		padding-left: 2em;
+		text-align: center;
+		width: 5em;
+		height: 2em;
+		vertical-align: middle;
+	}
+			
+	ul {
+		background-color: #222;
+		width: 12em;
+		height: 3em;
+		vertical-align: middle;
+		border-radius: 5px;
+	}
+			
+	.rank0 {
+		width: 380px;
+		height: 380px;
+		background-color: #222;
+		background-image: url("http://userserve-ak.last.fm/serve/300x300/66586856.png");
+		background-size: 100%;
+		background-repeat: no-repeat;
+		position: relative;
 	}
 
 	.rank1 {
-		width: 150px;
-		height: 150px;
-	}	
+		width: 190px;
+		height: 190px;
+		background-color: #222;
+		background-image: url("http://userserve-ak.last.fm/serve/300x300/66586856.png");
+		background-size: 100%;
+		background-repeat: no-repeat;
+		position: relative;
+	}
 
 	.rank2 {
-		width: 200px;
-		height: 200px;
+		width: 95px;
+		height: 95px;
+		background-color: #222;
+		background-image: url("http://userserve-ak.last.fm/serve/300x300/66586856.png");
+		background-size: 100%;
+		background-repeat: no-repeat;
+		position: relative;
+	}
+	
+	.links {
+		display:none;
+	}	
+
+			
+	.overlay0 {
+		position: absolute;
+		width: 100%;
+		height: 5em;
+		bottom: 0;
+		background-color: rgba(3, 3, 3, 0.6);
+	}
+	
+	.overlay1 {
+		position: absolute;
+		width: 100%;
+		height: 4em;
+		bottom: 0;
+		background-color: rgba(3, 3, 3, 0.6);
+	}
+	
+	.overlay2 {
+		position: absolute;
+		width: 100%;
+		height: 2em;
+		bottom: 0;
+		background-color: rgba(3, 3, 3, 0.6);
+	}
+			
+	.t0 {
+		margin-top: .3em;	
+		margin-left: .6em;
+		font-size: 2em;
+		font-weight: normal;
+		color: #FFF;
+	}
+			
+	.st0 {
+		margin-left: 1.3em;
+		font-weight: normal;
+		color: #FFF;	
+	}
+	
+	.t1 {
+		margin-top: .3em;	
+		margin-left: .5em;
+		font-size: 1.4em;
+		font-weight: normal;
+		color: #FFF;
+	}
+	
+	.st1 {
+		margin-left: .8em;
+		font-weight: normal;
+		color: #FFF;
+	}
+	
+	.t2 {
+		margin-top: .3em;	
+		margin-left: .6em;
+		font-size: 12px;
+		font-weight: normal;
+		color: #FFF;
+	}
+	
+	.st2 {
+		margin-left: .9em;
+		font-size: 9px;
+		font-weight: normal;
+		color: #FFF;
+	}
+	
+	.song {
+		margin-bottom: .7em;
 	}
 
-	.rank3 {
-		width: 250px;
-		height: 250px;
-	}
 
 /* ============================= */
 /* ! Layout for mobile version   */

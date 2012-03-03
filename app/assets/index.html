@@ -1,129 +1,68 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
+		<meta charset="utf-8" />
+		<title>The 1140px Grid &middot; Fluid down to mobile</title>
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	
+		<!-- 1140px Grid styles for IE -->
+		<!--[if lte IE 9]><link rel="stylesheet" href="css/ie.css" type="text/css" media="screen" /><![endif]-->
+
+		<!-- The 1140px Grid - http://cssgrid.net/ -->
+		<link rel="stylesheet" href="stylesheets/1140.css" type="text/css" media="screen" />
+	
+		<!-- Your styles -->
+		<link rel="stylesheet" href="stylesheets/styles.css" type="text/css" media="screen" />
+	
+		<!--css3-mediaqueries-js - http://code.google.com/p/css3-mediaqueries-js/ - Enables media queries in some unsupported browsers-->
+		<script type="text/javascript" src="javascripts/css3-mediaqueries.js"></script>
+		
 		<script src="javascripts/jquery.js"></script>
 		<script src="javascripts/underscore.js"></script>
 		<script src="javascripts/backbone.js"></script>
 		<script src="javascripts/jquery.masonry.min.js"></script>
 		<script src="javascripts/jplayer.js"></script>
-		<style>
-			* {
-				font-family: sans-serif, Arial;
-				margin: 0;
-				padding: 0;
-			}
-			
-			html {
-				padding-top: 2em;
-				background-image: url("images/bg.gif");
-			}
-			
-			ul li {
-				list-style: none;
-				float: left;
-				margin-right: 1em;
-			}
-			
-			ul li a {
-				text-decoration: none;
-				color: #FFF;
-			}
-			
-			.navlinks {
-				padding-top: .8em;
-				text-align: center;
-				width: 5em;
-				height: 2em;
-				vertical-align: middle;
-			}
-			
-			ul {
-				background-color: #222;
-				width: 12em;
-				height: 3em;
-				vertical-align: middle;
-			}
-			
-			.rank0 {
-				width: 380px;
-				height: 380px;
-				background-color: #222;
-				background-image: url("http://userserve-ak.last.fm/serve/300x300/66586856.png");
-				background-size: 100%;
-				background-repeat: no-repeat;
-				position: relative;
-			}
-
-			.rank1 {
-				width: 190px;
-				height: 190px;
-				background-color: #222;
-				background-image: url("http://userserve-ak.last.fm/serve/300x300/66586856.png");
-				background-size: 100%;
-				background-repeat: no-repeat;
-				position: relative;
-			}
-
-			.rank2 {
-				width: 95px;
-				height: 95px;
-				background-color: #222;
-				background-image: url("http://userserve-ak.last.fm/serve/300x300/66586856.png");
-				background-size: 100%;
-				background-repeat: no-repeat;
-				position: relative;
-			}
-			.links {
-				display:none;
-			}	
-
-			
-			.subtitle {
-				position: absolute;
-				width: 100%;
-				height: 5em;
-				bottom: 0;
-				background-color: rgba(3, 3, 3, 0.6);
-			}
-			
-			h1 {
-				margin-top: .5em;	
-				margin-left: 1em;
-				font-size: 2em;
-				font-weight: normal;
-				color: #FFF;
-			}
-			
-			h4 {
-				margin-left: 2.1em;
-				font-weight: normal;
-				color: #FFF;	
-			}
-		</style>
+		<link rel="stylesheet" href="stylesheets/styles.css"/>
 	</head>
 	<body>
 		<!-- navigation -->
-		<nav>
-			<img src="images/logo.png"/>
-			<ul>
-				<li><a href="#"><div class="navlinks">trending</div></a></li>
-				<li><a href="#"><div class="navlinks">friends</div></a></li>
-			</ul>
+		<nav class="container">
+			<div class="row">
+				<div class="threecol">
+					<img src="images/logo.png"/>
+				</div>
+				<span class="threecol"></span>
+				<ul class="threecol" style="float:right;">
+					<li><a href="#"><div class="navlinks">trending</div></a></li>
+					<li><a href="#"><div class="navlinks">friends</div></a></li>
+				</ul>	
+			</div>
 		</nav>
-
+		
+		<!--
+			<img src="images/logo.png"/>
+			
+		</nav>
+		
 		<div class="rank1">
 			<div class="subtitle">
 				<h1>Party Rock Anthem</h1>
 				<h4>LMFAO</h4>
 			</div>	
 		</div>
-	<div id="jquery_jplayer"></div>
+		-->
+		
+		<div id="jquery_jplayer"></div>
 
 			
 		<div id="sample"></div>
 		
 		<!-- album view -->
-		<div id="content">
+		<div class="container">
+			<div class="row">
+				<div id="content"></div>
+			</div>
 		</div>
 		
 		<!-- templates -->
@@ -134,9 +73,9 @@
 		<script type="text/template" id="song-template">
 			<div width="100px" class="song rank<%= rank %>">
 				<img src="http://userserve-ak.last.fm/serve/300x300/<%= art %>.png" class="rank<%= rank %>"/>
-				<div class="subtitle">
-					<h1><%= title %></h1>
-					<h4><%= artist %></h4>
+				<div class="overlay<%= rank %>">
+					<div class="t<%= rank %>"><%= title %></div>
+					<div class="st<%= rank %>"><%= artist %></div>
 					<div class="links">
 						<a href="#">A</a>
 						<a href="#">B</a>

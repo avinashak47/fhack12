@@ -37,17 +37,18 @@ SongModel = Backbone.Model.extend({
     }
 });
 
+var flip = false;
 SongView = Backbone.View.extend({
 
 
 	template: _.template($("#song-template").html()),
 
 	events: {
-		"hover .overlay0"	: "toggleButtons",
-		"hover .overlay1"	: "toggleButtons",
-		"hover .overlay2"	: "toggleButtons",
-		"click .videoButton"	: "playVideo",
-		"click .audioButton"	: "playAudio"
+		"hover .overlay0" : "toggleButtons",
+		"hover .overlay1" : "toggleButtons",
+		"hover .overlay2" : "toggleButtons",
+		"click .videoButton" : "playVideo",
+		"click .audioButton" : "playAudio"
 	},
 
 	initialize: function(options) {
@@ -75,8 +76,9 @@ SongView = Backbone.View.extend({
 		return this;
 	},
 
-	toggleButtons: function() {
+	toggleButtons: function(e) {
 		this.$(".links").toggle();
+		// this.$(".links").css("backgroundColor", "red");
 	},
 
 	playVideo: function() {

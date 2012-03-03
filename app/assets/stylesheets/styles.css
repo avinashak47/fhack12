@@ -87,6 +87,10 @@
 		background-color: rgba(3, 3, 3, 0.6);
 	}
 	
+	.overlay0:hover {
+		background-color: red;
+	}
+	
 	.overlay1 {
 		position: absolute;
 		width: 100%;
@@ -95,12 +99,20 @@
 		background-color: rgba(3, 3, 3, 0.6);
 	}
 	
+	.overlay1:hover {
+		background-color: red;
+	}
+	
 	.overlay2 {
 		position: absolute;
 		width: 100%;
 		height: 2em;
 		bottom: 0;
 		background-color: rgba(3, 3, 3, 0.6);
+	}
+	
+	.overlay2:hover {
+		background-color: red;
 	}
 			
 	.t0 {

@@ -110,14 +110,16 @@
 				<li><a href="#"><div class="navlinks">friends</div></a></li>
 			</ul>
 		</nav>
-		
+
 		<div class="rank1">
 			<div class="subtitle">
 				<h1>Party Rock Anthem</h1>
 				<h4>LMFAO</h4>
 			</div>	
 		</div>
-		
+	<div id="jquery_jplayer"></div>
+
+			
 		<div id="sample"></div>
 		
 		<!-- album view -->
@@ -148,25 +150,6 @@
 		<script src="javascripts/fhack.js"></script>
 		
 		<!-- jplayer -->
-		<script>
-		$(document).ready(function() {
-console.log(1);
-			$("#jquery_jplayer").jPlayer({
-    			ready: function (event) {
-    				console.log("ready");
-    		    	/*var $this = $(this);
- 					$("h1").click(function(e) {
-       					console.log("playing");
-       					$this.jPlayer("setMedia", { m4a: "http://a1.mzstatic.com/us/r1000/008/Music/6d/e2/e7/mzi.vmmixjty.aac.p.m4a" });
-        				$this.jPlayer("play");
-        				// e.preventDefault();
-        			});*/
-    			},
-		    	swfPath: "javascripts",
-    	    	supplied: "m4a"
-			});
-			console.log(2);
-		});
-		</script>
+		<script src="javascripts/fhack_jplayer.js"></script>
 	</body>
 </html>

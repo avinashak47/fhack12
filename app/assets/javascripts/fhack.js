@@ -57,6 +57,17 @@ SongView = Backbone.View.extend({
 
 	render: function(){
 		console.log("rendering view");
+
+		/*var query = "http://query.yahooapis.com/v1/public/yql?q=%20SELECT%20*%20FROM%20lastfm.album.getinfo%20WHERE%20api_key%3D%22b25b959554ed76058ac220b7b2e0a026%22%20and%20artist%3D%22"+escape(this.model.get("artist"))+"%22%20and%20album%3D%22"+escape(this.model.get("album"))+"%22&format=json&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=";
+
+		var link = "poop";
+		var m = this.model;
+		$.get(query,
+			function(data) {
+				var link = data.query.results.lfm.album.image[3].content;
+				m.set("art", link);
+			},
+			"json");*/
 		var html = this.template(this.model.toJSON());
 		//$("#sample").html();
 		//console.log(html);
@@ -69,14 +80,14 @@ SongView = Backbone.View.extend({
 	},
 
 	playVideo: function() {
+		if(videoPlaying) killVideo();
+		if(audioPlaying) killAudio();
 		var q = this.model.get("artist") +" "+ this.model.get("title");
 		var query = "http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20youtube.search%20where%20query%3D%22"+escape(q)+"%22&format=json&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=";
 		console.log(query);
 	$.get(query,
             function (data) {
                 var id = data.query.results.video[0].id;
-		if(videoPlaying) killVideo();
-		if(audioPlaying) killAudio();
 		$("#content").append($('<iframe id="video" style="margin:auto; position:fixed; left:28%" width="560" height="315" src="http://www.youtube.com/embed/'+id+'" frameborder="0" allowfullscreen></iframe>'));
 		videoPlaying = true;
             }, 
@@ -88,6 +99,17 @@ SongView = Backbone.View.extend({
 		if(audioPlaying) killAudio();
 		var artist = this.model.get("artist");
 		var title = this.model.get("title");
+		//var query = "http://itunes.apple.com/search?term="+escape(artist).replace(/%20/g, "+")+"+"+escape(title).replace(/%20/g,"+");
+
+		var query = "http://developer.echonest.com/api/v4/song/search?api_key=N6E4NIOVYMTHNDM8J&format=json&results=1&artist="+escape(artist)+"&title="+escape(title)+"&bucket=id:7digital-US&bucket=audio_summary&bucket=tracks";
+		var url = "";
+		$.get(query,
+			function(data) {
+				url = data.response.songs[0].tracks[0].preview_url;
+				$("#jp_container_1").jPlayer("setMedia", url);
+				console.log(url);
+			}, 
+			"json");
 		$("#jp_container_1").show();
 		$(".jp-title ul li").html(artist + " - " + title);
 		$(".jp-play").click();
@@ -137,13 +159,18 @@ var s = [];
 Songs = new SongCollection();
 
 // simulation
-
+var titles = ["Born to be Wild", "Party Rock", "I Want It That Way", "Rolling in the Deep", "Not Afraid"];
+var albums = ["Steppenwolf", "Party Rock", "Millennium", "21", "Recovery"];
+var artists = ["Steppenwolf", "Lmfao", "Backstreet Boys", "Adele", "Eminem"];
+var arts = ["52661047", "70529764", "70938188", "55125087", "68343678"];
 for (i = 0; i < 20; i++) {
+	var ind = Math.floor(Math.random()*5);
+	console.log("index " + ind);
 	Songs.add(new SongModel({
-		title: "Born to be Wild",
-        album: "Steppenwolf",
-        artist: "Steppenwolf",
-        art: "52661047",
+		title: titles[ind],
+        album: albums[ind],
+        artist: artists[ind],
+        art: arts[ind],
         rank: Math.floor(Math.random()*3) 
      }));
 } 

@@ -21,7 +21,7 @@ def self.build_song_index (oauth_access_token)
 		friendMusicData <<  graph.get_connections("#{friend['id']}", "music.listens")	
 
 		friendArtistData.each { |artistData| 
-			tempArtist = Artist.new
+			tempArtist = Artists.new
 			tempArtist[:hash_id] = artistData['id']
 			tempArist[:group_name] = artistData['name']
 			if (tempArtist.valid?)
@@ -30,7 +30,7 @@ def self.build_song_index (oauth_access_token)
 		}
 
 		friendMusicData.each { |musicData| 
-			tempSong = Song.new
+			tempSong = Songs.new
 			tempDetails = graph.get_object("#{musicData['data']['id']}")
 			tempSong[:hash_id] = "#{musicData['data']['id']}"
 			tempSong[:song_name] = musicData['song']['title']

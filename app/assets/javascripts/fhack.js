@@ -1,7 +1,10 @@
 SongModel = Backbone.Model.extend({
     defaults: {
         title: "Born to be Wild",
-        artist: "Steppenwolf"
+        album: "Steppenwolf",
+        artist: "Steppenwolf",
+        art: "http://userserve-ak.last.fm/serve/_/52661047/Steppenwolf.jpg",
+        rank: 3
     },
     initialize: function() {
         console.log("model initialized");
@@ -36,7 +39,12 @@ AppView = Backbone.View.extend({
 
 
 // initializations
-test = new SongModel();
+var i;
+var s = [];
+
 Songs = new SongCollection();
-Songs.add(test);
+for (i = 0; i < 20; i++) {
+	Songs.add(new SongModel());
+}
+// Songs.add(s1);
 App = new AppView();

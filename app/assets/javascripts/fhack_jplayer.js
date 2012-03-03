@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	$("#jquery_jplayer").jPlayer({
+	$("#jquery_jplayer_1").jPlayer({
     	ready: function (event) {
     		console.log("ready");
     		var $this = $(this);

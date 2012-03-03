@@ -1,4 +1,5 @@
 var videoPlaying = false;
+var audioPlaying = false;
 
 $("body").click(function() { killVideo(); });
 
@@ -6,6 +7,14 @@ function killVideo() {
 	if(videoPlaying) {
 		$("#video").remove();
 		videoPlaying = false;
+	}
+}
+
+function killAudio() {
+	if(audioPlaying) {
+		$(".jp-stop").click();
+		$("#jp_container_1").hide();
+		audioPlaying = false;
 	}
 }
 
@@ -37,7 +46,8 @@ SongView = Backbone.View.extend({
 		"hover .overlay0"	: "toggleButtons",
 		"hover .overlay1"	: "toggleButtons",
 		"hover .overlay2"	: "toggleButtons",
-		"click .videoButton"		: "playVideo"
+		"click .videoButton"	: "playVideo",
+		"click .audioButton"	: "playAudio"
 	},
 
 	initialize: function(options) {
@@ -66,12 +76,23 @@ SongView = Backbone.View.extend({
             function (data) {
                 var id = data.query.results.video[0].id;
 		if(videoPlaying) killVideo();
+		if(audioPlaying) killAudio();
 		$("#content").append($('<iframe id="video" style="margin:auto; position:fixed; left:28%" width="560" height="315" src="http://www.youtube.com/embed/'+id+'" frameborder="0" allowfullscreen></iframe>'));
 		videoPlaying = true;
             }, 
             "json");
-	}
+	},
 
+	playAudio: function() {
+		if(videoPlaying) killVideo();
+		if(audioPlaying) killAudio();
+		var artist = this.model.get("artist");
+		var title = this.model.get("title");
+		$("#jp_container_1").show();
+		$(".jp-title ul li").html(artist + " - " + title);
+		$(".jp-play").click();
+		audioPlaying = true;
+	}
 	
 });
 

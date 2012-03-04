@@ -41,18 +41,20 @@ def self.build_song_index (oauth_access_token)
 		friendArtistData.each { |batch|
 			if (!batch.nil?)
 			batch.each { |artistDataArray|
-				artistDataArray.each { |artistData|
-				if (!artistData.nil?)
-						if (artistData.is_a?(Hash))
-						tempArtist = Artists.new
-						tempArtist[:hash_id] = artistData['id']
-						tempArtist[:group_name] = artistData['name']
-						if (tempArtist.valid?)
-								tempArtist.save
-						end	
-					end
-				end	
-				}					
+				if (!artistDataArray.nil?)
+					artistDataArray.each { |artistData|
+					if (!artistData.nil?)
+							if (artistData.is_a?(Hash))
+							tempArtist = Artists.new
+							tempArtist[:hash_id] = artistData['id']
+							tempArtist[:group_name] = artistData['name']
+							if (tempArtist.valid?)
+									tempArtist.save
+							end	
+						end
+					end	
+					}	
+				end				
 			}
 			end
 		}
@@ -60,22 +62,34 @@ def self.build_song_index (oauth_access_token)
 		friendMusicData.each { |batch|
 			if (!batch.nil?)
 			batch.each { |musicDataArray| 
-					musicDataArray.each { |musicData|
-					if (!musicData.nil?)
-						if (musicData.is_a?(Hash))
-							tempSong = Songs.new
-							tempDetails = graph.get_object("#{musicData['data']['id']}")
-							tempSong[:hash_id] = musicData['data']['id']	
-							tempSong[:song_name] = musicData['song']['title']
-							tempSong[:albumName] = tempDetails['data']['album']['url']['title']
-							tempSong[:artist_name] = tempDetails['data']['musicians']['name']
-							if (tempSong.valid?)
-								tempSong.save
+					if (!musicDataArray.nil?)
+						musicDataArray.each { |musicData|
+						if (!musicData.nil?)
+							if (musicData.is_a?(Hash))
+								tempSong = Songs.new
+								#return musicData
+								tempDetails = graph.get_object("#{musicData['data']['song']['id']}")
+								tempSong[:hash_id] = musicData['data']['song']['id']	
+								tempSong[:song_name] = musicData['data']['song']['title']
+								#return tempDetails
+								if (!tempDetails.nil?)
+									if (!tempDetails['data'].nil?)
+										if (!tempDetails['data']['album'].nil?)
+											tempSong[:albumName] = tempDetails['data']['album'][0]['url']['title']
+										end
+										if (!tempDetails['data']['musician'].nil?)
+											tempSong[:artist_name] = tempDetails['data']['musician'][0]['name']
+										end
+									end
+								end
+								if (tempSong.valid?)
+									tempSong.save
+								end
 							end
 						end
+					}					
 					end
 					}
-				}
 			end
 		}
 	

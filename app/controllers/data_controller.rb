@@ -40,27 +40,32 @@ def self.build_song_index (oauth_access_token)
 
 		friendArtistData.each { |artistData| 		
 			if (!artistData.nil?)
-				tempArtist = Artists.new
-				tempArtist[:hash_id] = String(artistData['id'])	
-				tempArist[:group_name] = artistData['name']
-				if (tempArtist.valid?)
-						tempArtist.save
-				end	
+				if (!artistData['id'].nil?)
+					tempArtist = Artists.new
+					tempArtist[:hash_id] = String(artistData['id'])	
+					tempArist[:group_name] = artistData['name']
+					if (tempArtist.valid?)
+							tempArtist.save
+					end	
+				end
 			end					
 		}
 
 		friendMusicData.each { |musicData| 
 			if (!musicData.nil?)
-				tempSong = Songs.new
-				tempDetails = graph.get_object("#{musicData['data']['id']}")
-				tempSong[:hash_id] = musicData['data']['id']	
-				tempSong[:song_name] = musicData['song']['title']
-				tempSong[:albumName] = tempDetails['data']['album']['url']['title']
-				tempSong[:artist_name] = tempDetails['data']['musicians']['name']
-				if (tempSong.valid?)
-					tempSong.save
+				if (!musicData['id'].nil?)
+					tempSong = Songs.new
+					tempDetails = graph.get_object("#{musicData['data']['id']}")
+					tempSong[:hash_id] = musicData['data']['id']	
+					tempSong[:song_name] = musicData['song']['title']
+					tempSong[:albumName] = tempDetails['data']['album']['url']['title']
+					tempSong[:artist_name] = tempDetails['data']['musicians']['name']
+					if (tempSong.valid?)
+						tempSong.save
+					end
 				end
 			end
+		
 																																																																																																																				
 		}
 	

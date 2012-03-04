@@ -21,11 +21,13 @@ def self.build_song_index (oauth_access_token)
 			friendArtistData[counter] = Array.new
 			friendMusicData[counter] = Array.new
 			
-			friendArtistData[counter]= graph.batch do |batch_api|
+			friendArtistData[counter]= graph.batch do |batch_api| 	
 				friends[(counter*25)..((counter+1)*25-1)].each { |friend|
-			 		batch_api.get_connections("#{friend['id']}", 'music')
+				 		batch_api.get_connections("#{friend['id']}", 'music')
 				}
-			friendMusicData[counter] = graph.batch do |batch_api|
+			end
+
+			friendMusicData[counter] = graph.batch do |batch_api| 	
 				friends[(counter*25)..((counter+1)*25-1)].each { |friend|
 					  batch_api.get_connections("#{friend['id']}", 'music.listens')
 				}

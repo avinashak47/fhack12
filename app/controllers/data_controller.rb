@@ -164,6 +164,8 @@ def get_songs
 			dataElem[:plays] = result['popularity']
 			songQuery = Songs.where(:hash_id=>result['song_hash_id'])
 			songData = ActiveSupport::JSON.decode(songQuery.to_json)
+			render :json=>{:elem=>result,:songdata=>songData}
+			return
 			dataElem[:artist] =String( songData['0']['artist_name'] )
 			dataElem[:album] = String (songData['0']['album_name'])
 			dataElem[:title] = songData['0']['song_name']

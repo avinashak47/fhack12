@@ -35,38 +35,48 @@ def self.build_song_index (oauth_access_token)
 			
 			counter+=1
 		end
+		
 
-
-
-		friendArtistData.each { |artistData| 		
-			if (!artistData.nil?)
-				if (!artistData['id'].nil?)
-					tempArtist = Artists.new
-					tempArtist[:hash_id] = String(artistData['id'])	
-					tempArist[:group_name] = artistData['name']
-					if (tempArtist.valid?)
-							tempArtist.save
-					end	
-				end
-			end					
+	
+		friendArtistData.each { |batch|
+			if (!batch.nil?)
+			batch.each { |artistDataArray|
+				artistDataArray.each { |artistData|
+				if (!artistData.nil?)
+						if (artistData.is_a?(Hash))
+						tempArtist = Artists.new
+						tempArtist[:hash_id] = artistData['id']
+						tempArtist[:group_name] = artistData['name']
+						if (tempArtist.valid?)
+								tempArtist.save
+						end	
+					end
+				end	
+				}					
+			}
+			end
 		}
 
-		friendMusicData.each { |musicData| 
-			if (!musicData.nil?)
-				if (!musicData['id'].nil?)
-					tempSong = Songs.new
-					tempDetails = graph.get_object("#{musicData['data']['id']}")
-					tempSong[:hash_id] = musicData['data']['id']	
-					tempSong[:song_name] = musicData['song']['title']
-					tempSong[:albumName] = tempDetails['data']['album']['url']['title']
-					tempSong[:artist_name] = tempDetails['data']['musicians']['name']
-					if (tempSong.valid?)
-						tempSong.save
+		friendMusicData.each { |batch|
+			if (!batch.nil?)
+			batch.each { |musicDataArray| 
+					musicDataArray.each { |musicData|
+					if (!musicData.nil?)
+						if (musicData.is_a?(Hash))
+							tempSong = Songs.new
+							tempDetails = graph.get_object("#{musicData['data']['id']}")
+							tempSong[:hash_id] = musicData['data']['id']	
+							tempSong[:song_name] = musicData['song']['title']
+							tempSong[:albumName] = tempDetails['data']['album']['url']['title']
+							tempSong[:artist_name] = tempDetails['data']['musicians']['name']
+							if (tempSong.valid?)
+								tempSong.save
+							end
+						end
 					end
-				end
+					}
+				}
 			end
-		
-																																																																																																																				
 		}
 	
 	

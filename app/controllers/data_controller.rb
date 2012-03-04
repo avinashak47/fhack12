@@ -4,7 +4,7 @@ class DataController < ApplicationController
 def build_song_index
 	begin
 
-	graph = Koala::Facebook::API.new(LoginController::oauth_token)
+	graph = Koala::Facebook::API.new(session[:oauth_token])
 	friends = graph.get_connections("me", "friends")	
 	profile = graph.get_object("me")	
 	friends << {'id'=>profile['id'],'name'=>profile['name']}
@@ -151,7 +151,7 @@ end
 
 def get_songs
 	begin
-		graph = Koala::Facebook::API.new(LoginController::oauth_token)
+		graph = Koala::Facebook::API.new(session[:oauth_token])
 		profile = graph.get_object("me")	
 		userID = profile['id'];
 		

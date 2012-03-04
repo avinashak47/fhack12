@@ -12,7 +12,7 @@ def fb_callback
 		return
 	 else
 		oauth = Koala::Facebook::OAuth.new(FB[:id], FB[:secret], 'http://gentle-fire-7931.heroku.com/FB/FBCallback')
-	 	@@oauth_token = oauth.get_access_token(params['code'])
+	 	session[:oauth_token] = oauth.get_access_token(params['code'])
 		
 		render :json => {:result => "success"}
 		return

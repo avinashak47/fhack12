@@ -39,10 +39,11 @@ ActiveRecord::Schema.define(:version => 20120303155329) do
   end
 
   create_table "songs_relations", :force => true do |t|
-    t.string   "user_id",       :null => false
-    t.string   "song_hash_id",  :null => false
+    t.string   "user_id",            :null => false
+    t.string   "song_hash_id",       :null => false
     t.integer  "popularity"
-    t.date     "last_listened", :null => false
+    t.date     "last_listened"
+    t.string   "friends_who_played"
     t.string   "image_link"
     t.datetime "created_at"
     t.datetime "updated_at"

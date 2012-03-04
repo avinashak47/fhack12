@@ -15,21 +15,24 @@ def self.build_song_index (oauth_access_token)
 	friends << {'id'=>profile['id'],'name'=>profile['name']}
 	friendArtistData = Array.new
 	friendMusicData = Array.new
-	frndsLimit = (friends.length / 5).ceil;
+	frndsLimit = (friends.length / 25).ceil;
 	counter=0
-		#while (counter<=frndsLimit) do
+		while (counter<=frndsLimit) do
 			friendArtistData[counter] = Array.new
 			friendMusicData[counter] = Array.new
 			
-			friendArtistData[counter], friendMusicData[counter] = graph.batch do |batch_api|
-				friends[(counter*5)..((counter+1)*5-1)].each { |friend|
+			friendArtistData[counter]= graph.batch do |batch_api|
+				friends[(counter*25)..((counter+1)*25-1)].each { |friend|
 			 		batch_api.get_connections("#{friend['id']}", 'music')
+				}
+			friendMusicData[counter] = graph.batch do |batch_api|
+				friends[(counter*25)..((counter+1)*25-1)].each { |friend|
 					  batch_api.get_connections("#{friend['id']}", 'music.listens')
 				}
 			end
 			
-		#	counter+=1
-		#end
+			counter+=1
+		end
 
 
 		return {:artists=>friendArtistData,:songs=>friendMusicData}

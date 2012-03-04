@@ -38,7 +38,7 @@ def self.build_song_index (oauth_access_token)
 		end
 		
 		datahash=Hash.new
-	
+
 		friendArtistData.each { |batch|
 			if (!batch.nil?)
 			batch.each { |artistDataArray|
@@ -46,15 +46,15 @@ def self.build_song_index (oauth_access_token)
 					artistDataArray.each { |artistData|
 					if (!artistData.nil?)
 							if (artistData.is_a?(Hash))
-								checkExisting = Artists.where(:hash_id=>artistData['id'])
 									datahash={:artist_hash_id=>artistData['id'],:user_id=>userID, :popularity=>1}
-								if (!checkExisting.nil?)
+								checkExisting = Artists.where(:hash_id=>artistData['id'])
+
+								if (checkExisting[0]!="null"  && checkExisting.to_json!="[]" )
 							
 									checkUserHas = ArtistRelations.where(datahash)
 									if (checkUserHas[0].to_json!="null")
-										datahash= checkUserHas[0].to_json
-										return checkUserHas[0].to_json
-										datahash['popularity']+=1
+										datahash= ActiveSupport::JSON.decode(checkUserHas[0].to_json)
+										datahash['popularity']=Integer(datahash['popularity'])+ 1
 									end
 										newArtistRelation = ArtistRelations.new(datahash)
 										newArtistRelation.save
@@ -69,15 +69,17 @@ def self.build_song_index (oauth_access_token)
 											newArtistRelation.save
 									end	
 								end
-						end
+							end
 					end	
 					}	
 				end				
 			}
 			end
 		}
+
+
 		datahash2=Hash.new		
-		datahash2={:song_hash_id=>musicData['data']['song']['id'],:user_id=>userID, :popularity=>1}
+
 
 		friendMusicData.each { |batch|
 			if (!batch.nil?)
@@ -86,24 +88,23 @@ def self.build_song_index (oauth_access_token)
 						musicDataArray.each { |musicData|
 						if (!musicData.nil?)
 							if (musicData.is_a?(Hash))
+							datahash2={:song_hash_id=>musicData['data']['song']['id'],:user_id=>userID, :popularity=>1}
 								checkExisting = Songs.where(:hash_id=>musicData['data']['song']['id'])
-								if (!checkExisting.nil?)
+								if (checkExisting[0].to_json!="null" && checkExisting.to_json!="[]" )
 
 									checkUserHas = SongsRelations.where(datahash2)
 									if (checkUserHas[0].to_json!="null")
-										datahash2= checkUserHas[0].to_json
-										datahash2['popularity']+=1
+										datahash2= ActiveSupport::JSON.decode(checkUserHas[0].to_json)
+										datahash2['popularity'] = Integer(datahash2['popularity'])+ 1
 									end
 										newSongRelation = SongsRelations.new(datahash2)
 										newSongRelation.save
 										
 								else
 									tempSong = Songs.new
-									#return musicData
 									tempDetails = graph.get_object("#{musicData['data']['song']['id']}")
 									tempSong[:hash_id] = musicData['data']['song']['id']	
 									tempSong[:song_name] = musicData['data']['song']['title']
-									#return tempDetails
 									if (!tempDetails.nil?)
 										if (!tempDetails['data'].nil?)
 											if (!tempDetails['data']['album'].nil?)

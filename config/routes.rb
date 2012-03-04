@@ -17,6 +17,8 @@ Fhack::Application.routes.draw do
 
   match '/FB/login' => 'login#fb_login'
   match '/FB/FBCallback' => 'login#fb_callback'
+  match '/get_songs' => 'data#get_songs'
+  match '/setup' => 'data#build_song_index'
   #match '/:id/artists' => 
   #match '/:id/songs' =>
   

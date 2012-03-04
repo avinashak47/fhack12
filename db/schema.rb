@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120303155329) do
+ActiveRecord::Schema.define(:version => 20120304041336) do
 
   create_table "artist_relations", :force => true do |t|
     t.string   "user_id",        :null => false
@@ -25,6 +25,12 @@ ActiveRecord::Schema.define(:version => 20120303155329) do
   create_table "artists", :force => true do |t|
     t.string   "hash_id",    :null => false
     t.string   "group_name", :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "seen_users", :force => true do |t|
+    t.string   "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

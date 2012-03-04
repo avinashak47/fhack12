@@ -1,15 +1,10 @@
 class DataController < ApplicationController
 
-def self.get_songs
-	if (param[:id].nil?)
-		render :json=> {}
-		return
-	end
 
-end 
+def build_song_index
+	begin
 
-def self.build_song_index (oauth_access_token)
-	graph = Koala::Facebook::API.new(oauth_access_token)
+	graph = Koala::Facebook::API.new(LoginController::oauth_token)
 	friends = graph.get_connections("me", "friends")	
 	profile = graph.get_object("me")	
 	friends << {'id'=>profile['id'],'name'=>profile['name']}
@@ -17,6 +12,17 @@ def self.build_song_index (oauth_access_token)
 	friendMusicData = Array.new
 	frndsLimit = (friends.length / 25).ceil;
 	userID=profile['id']
+
+	userSeen = SeenUsers.where(:user_id=>userID)
+
+	if (userSeen[0]!="null"  && userSeen.to_json!="[]" )
+		render :json => {:status=>"user seen"}		
+		return
+	else
+		userSeen = SeenUsers.new(:user_id=>userID)
+		userSeen.save
+	end
+
 	counter=0
 		while (counter<=frndsLimit) do
 			friendArtistData[counter] = Array.new
@@ -63,6 +69,8 @@ def self.build_song_index (oauth_access_token)
 									tempArtist = Artists.new
 									tempArtist[:hash_id] = artistData['id']
 									tempArtist[:group_name] = artistData['name']
+
+
 									if (tempArtist.valid?)
 											tempArtist.save
 											newArtistRelation = ArtistRelations.new(datahash)
@@ -108,13 +116,15 @@ def self.build_song_index (oauth_access_token)
 									if (!tempDetails.nil?)
 										if (!tempDetails['data'].nil?)
 											if (!tempDetails['data']['album'].nil?)
-												tempSong[:albumName] = tempDetails['data']['album'][0]['url']['title']
+												tempSong[:album_name] = tempDetails['data']['album'][0]['url']['title']
 											end
 											if (!tempDetails['data']['musician'].nil?)
 												tempSong[:artist_name] = tempDetails['data']['musician'][0]['name']
 											end
 										end
 									end
+
+									
 									if (tempSong.valid?)
 										tempSong.save
 										newSongRelation = SongsRelations.new(datahash2)
@@ -131,7 +141,43 @@ def self.build_song_index (oauth_access_token)
 	
 	
 	return 
+
+	rescue Exception=>e
+		render :json=>{:error=>e}
+		return
+	end
 end
 
+
+def get_songs
+	begin
+		graph = Koala::Facebook::API.new(LoginController::oauth_token)
+		profile = graph.get_object("me")	
+		userID = profile['id'];
+		
+		userQuery = SongsRelations.where(:user_id=>userID)
+		userQueryResult = ActiveSupport::JSON.decode(userQuery.to_json)
+		
+		returnArray=Array.new
+		userQueryResult.each { |result| 
+			dataElem=Hash.new
+			dataElem[:plays] = dataElem['popularity']
+			songQuery = Songs.where(:hash_id=>result['song_hash_id'])
+			songData = ActiveSupport::JSON.decode(songQuery.to_json)
+			dataElem[:artist] = songData['0']['artist_name'] 
+			dataElem[:album] = songData['0']['album_name']
+			dataElem[:title] = songData['0']['song_name']
+			returnArray << dataElem
+		}
+
+		render :json => {:data=>returnArray}
+		return
+	rescue Exception=>e
+		render :json=>{:error=>e}
+		return
+	
+	end	
+
+end
 
 end

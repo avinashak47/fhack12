@@ -23,7 +23,7 @@ def self.build_song_index (oauth_access_token)
 			
 			friendArtistData[frndsLimit-1], friendMusicData[frndsLimit-1] = graph.batch do |batch_api|
 				friends[((frndsLimit-1)*25)..(frndsLimit*25-1)].each { |friend|
-			 		batch_api.get_connections("#{friend['id']}", "music")
+			 		batch_api.get_connections("#{friend['id']}", 'music')
 					  batch_api.get_connections("#{friend['id']}", 'music.listens')
 				}
 			end
@@ -32,7 +32,7 @@ def self.build_song_index (oauth_access_token)
 		end
 
 
-		return [friendArtistData]
+		return {:artists=>friendArtistData,:songs=>friendMusicData}
 		friendArtistData.each { |artistData| 		
 			tempArtist = Artists.new
 			tempArtist[:hash_id] = String(artistData['id'])	

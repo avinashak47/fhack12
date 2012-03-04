@@ -139,11 +139,11 @@ def build_song_index
 			end
 		}
 	
-	
+	render :json=>{:result=>"setup success"}
 	return 
 
 	rescue Exception=>e
-		render :json=>{:error=>e}
+		render :json=>{:error=>e.msg}
 		return
 	end
 end
@@ -172,10 +172,7 @@ def get_songs
 
 		render :json => {:data=>returnArray}
 		return
-	rescue Exception=>e
-		render :json=>{:error=>e}
-		return
-	
+
 	end	
 
 end

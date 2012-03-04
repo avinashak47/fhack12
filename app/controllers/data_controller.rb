@@ -24,7 +24,7 @@ def self.build_song_index (oauth_access_token)
 			friendArtistData[counter], friendMusicData[counter] = graph.batch do |batch_api|
 				friends[(counter*25)..((counter+1)*25-1)].each { |friend|
 			 		batch_api.get_connections("#{friend['id']}", 'music')
-					  batch_api.get_connections(Integer(friend['id']), 'music.listens')
+					  batch_api.get_connections('ianandersonlol', 'music.listens')
 				}
 			end
 			

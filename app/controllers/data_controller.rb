@@ -166,7 +166,7 @@ def get_songs
 			songData = ActiveSupport::JSON.decode(songQuery.to_json)
 			dataElem[:artist] =String( songData[0]['artist_name'] )
 			dataElem[:album] = String (songData[0]['album_name'])
-			dataElem[:title] = songData['0']['song_name']
+			dataElem[:title] = songData[0]['song_name']
 			returnArray << dataElem
 		}
 

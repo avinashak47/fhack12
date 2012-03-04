@@ -139,7 +139,7 @@ def build_song_index
 			end
 		}
 	
-	render :json=>{:result=>"setup success"}
+	redirect_to "/assets/index.html"
 	return 
 
 	rescue Exception=>e

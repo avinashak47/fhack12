@@ -14,7 +14,7 @@ Fhack::Application.routes.draw do
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
 
-
+  match '/' => 'login#fb_login'
   match '/FB/login' => 'login#fb_login'
   match '/FB/FBCallback' => 'login#fb_callback'
   match '/get_songs' => 'data#get_songs'

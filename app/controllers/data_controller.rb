@@ -17,7 +17,7 @@ def self.build_song_index (oauth_access_token)
 	friendMusicData = Array.new
 	frndsLimit = (friends.length / 5).ceil;
 	counter=0
-		while (counter<=frndsLimit) do
+		#while (counter<=frndsLimit) do
 			friendArtistData[counter] = Array.new
 			friendMusicData[counter] = Array.new
 			
@@ -28,8 +28,8 @@ def self.build_song_index (oauth_access_token)
 				}
 			end
 			
-			counter+=1
-		end
+		#	counter+=1
+		#end
 
 
 		return {:artists=>friendArtistData,:songs=>friendMusicData}
